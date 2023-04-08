@@ -1,38 +1,13 @@
 import { NearestFilter, TextureLoader, RepeatWrapping } from 'three'
 
-import {
-	dirtImg,
-	logImg,
-	grassImg,
-	glassImg,
-	woodImg,
-	boxImg
-} from './images'
+import images from './images'
 
-const dirtTexture = new TextureLoader().load(dirtImg)
-const logTexture = new TextureLoader().load(logImg)
-const grassTexture = new TextureLoader().load(grassImg)
-const glassTexture = new TextureLoader().load(glassImg)
-const woodTexture = new TextureLoader().load(woodImg)
-const groundTexture = new TextureLoader().load(grassImg)
-const boxTexture = new TextureLoader().load(boxImg)
+const texturesList = images.reduce((acc, texture) => {
+	acc[texture.name] = new TextureLoader().load(texture.image);
+	acc[texture.name].magFilter = NearestFilter;
+	acc[texture.name].wrapS = RepeatWrapping;
+	acc[texture.name].wrapT = RepeatWrapping;
+	return acc;
+}, {});
 
-dirtTexture.magFilter = NearestFilter;
-logTexture.magFilter = NearestFilter;
-grassTexture.magFilter = NearestFilter;
-glassTexture.magFilter = NearestFilter;
-woodTexture.magFilter = NearestFilter;
-groundTexture.magFilter = NearestFilter;
-groundTexture.wrapS = RepeatWrapping;
-groundTexture.wrapT = RepeatWrapping;
-boxTexture.magFilter = NearestFilter;
-
-export {
-	dirtTexture,
-	logTexture,
-	grassTexture,
-	glassTexture,
-	woodTexture,
-	groundTexture,
-	boxTexture
-}
+export default texturesList;

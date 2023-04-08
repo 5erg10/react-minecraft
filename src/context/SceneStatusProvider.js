@@ -12,9 +12,10 @@ const SceneStatus = (props) => {
 
     const [meshes, updateMeshes] = useState([rollOverMesh])
     const [collisionValid, updateCollision] = useState(false)
+    const [currentTexture, updateTexture] = useState('dirt')
 
     return (
-        <sceneStatus.Provider value={{meshes, updateMeshes, collisionValid, updateCollision}}>
+        <sceneStatus.Provider value={{meshes, updateMeshes, collisionValid, updateCollision, currentTexture, updateTexture}}>
             {props.children}
         </sceneStatus.Provider>
     )

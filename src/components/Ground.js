@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import * as THREE from 'three'
 import { sceneStatus } from '../context/SceneStatusProvider';
-import { boxTexture, grassTexture, woodTexture } from '../images/textures';
+import textures from '../images/textures';
 
 const Ground = (props) => {
     
@@ -14,7 +14,7 @@ const Ground = (props) => {
         geometry.rotateX( - Math.PI / 2 );
         for(let i = -initialPosition; i <= initialPosition; i += 1) {
             for(let e = -initialPosition; e <= initialPosition; e += 1) {
-                const plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { map: grassTexture, visible: true } ) );
+                const plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { map: textures.grass, visible: true } ) );
                 plane.name = "terrain"+i+e
                 plane.addValue = 0.5
                 plane.position.set(i, 0, e)
