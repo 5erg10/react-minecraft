@@ -22,3 +22,12 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
+
+### `deploy build`
+
+cd /build <!---from root folder to acces to build folder --> \
+git add -A \
+git commit <!---to save de changes--> \
+cd .. <!---to return to root folder-->
+git push origin :gh-pages <!---to reset branch-->
+git subtree push --prefix build origin gh-pages <!--- to deploy build with the new changes -->
