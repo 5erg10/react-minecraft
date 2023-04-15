@@ -17,12 +17,14 @@ const firstPersonControl = (camera, domElement) =>{
     }
 
     const keyEventAction = (key, status) => {
+        const validKeys = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'KeyW', 'KeyA', 'KeyS', 'KeyD'];
         return {
             [key === 'ArrowUp' || key === 'KeyW']: () => controls.movementDirection.moveForward = status,
             [key === 'ArrowLeft' || key === 'KeyA']: () => controls.movementDirection.moveLeft = status,
             [key === 'ArrowDown' || key === 'KeyS']: () => controls.movementDirection.moveBackward = status,
-            [key === 'ArrowRight' || key === 'KeyD']: () => controls.movementDirection.moveRight  = status
-        }.true() || false 
+            [key === 'ArrowRight' || key === 'KeyD']: () => controls.movementDirection.moveRight  = status,
+            [!validKeys.includes(key)]: () => false
+        }.true()
     }
 
     controls.update = (velocityFactor, time) => {

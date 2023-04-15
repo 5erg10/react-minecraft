@@ -8,10 +8,10 @@ function App() {
   return (
     <div className="App">
       <Scene bg-color="33BBFF">
-        <ToolsMenu/>
-        <DynamicCubes/>
         <Ground size={20}/>
+        <DynamicCubes/>
       </Scene>
+      <ToolsMenu/>
     </div>
   );
 }
