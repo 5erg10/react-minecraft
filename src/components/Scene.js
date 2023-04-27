@@ -26,25 +26,19 @@ const onWindowResize = () => {
     renderer.setSize(windowWidth, windowHeight);
 }
 
-const onPointerMove = ( ) => {
-    if(meshes && pointerStatus) {
-        pointer.set( 0, 0 );
+const onPointerMove = () => {
+    if (!meshes || !pointerStatus) return;
+    pointer.set( 0, 0 );
 
-        raycaster.setFromCamera( pointer, camera );
+    raycaster.setFromCamera( pointer, camera );
+
+    const intersects = raycaster.intersectObjects( meshes, false );
+
+    const intersect = intersects.length && intersects[ 0 ];
     
-        const intersects = raycaster.intersectObjects( meshes, false );
-    
-        if ( intersects.length > 0 ) {
-            const intersect = intersects[ 0 ];
-            dispatchAction({type: 'updateCollision', newCollisionState: intersect.object})
-            meshes[0].position.copy( intersect.object.position ).add( new Vector3(0,intersect.object.addValue,0) )
-            meshes[0].material.opacity = 0.2
-        }
-        else {
-            meshes[0].material.opacity = 0
-            dispatchAction({type: 'updateCollision', newCollisionState: false})
-        }
-    }
+    dispatchAction({type: 'updateCollision', newCollisionState: intersect ? intersect.object : false})
+    intersect && meshes[0].position.copy( intersect.object.position ).add( new Vector3(0,intersect.object.addValue,0) )
+    meshes[0].material.opacity = intersect ? 0.2 : 0
 }
 
 renderer.setPixelRatio( window.devicePixelRatio );
